@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"
+	<title></title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/mystyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+	
+</head>
+<body>
+	<span id="logo-text"></i>powered_by Navjot Singh <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+	<div class="main-heading"><h1>COVID-19 CORONA VIRUS PANDEMIC</h1></div>
+	<!-- ************************Main case Section start***************** -->
+<section class="header-extra-div">
+	<div class="container"> 
+	  <div class="row livestatus">
+		<div class=" col-lg-4 col-md-4 col-12  same extra-div1 " >
+		<li class="fa-3x fa fa-hand-o-down one" aria-hidden="true"></li>
+		  <h2 >Coronavirus Cases:</h2>
+		  <p id="totalcases">Updating....</p>
+		</div>
+  
+		<div class="col-lg-4 col-md-4 col-12 same extra-div2">
+		  <li class="fa-3x fa fa-hand-o-down two" aria-hidden="true" ></li>
+		  <h2>Deaths:</h2>
+		  <p id="totaldeaths">Updating....</p>
+		</div>
+  
+		<div class="col-lg-4 col-md-4 col-12 same extra-div3">
+		<li class="fa-3x fa fa-hand-o-down three" aria-hidden="true"></li>
+		  <h2>Recovered:</h2>
+		  <p id="totalrecovered">Updating...</p>
+		</div>
+
+	  </div>
+	</div>
+  </section>
+<!-- ************************Main case Section start***************** -->
+<hr>
+
+<!-- **************************Active closed cases start*********************** -->
+<section class="serviceoffers" id="casecontainer">
+	  <h1 class="text-center font-weight-bold">ACTIVE CASES &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;CLOSED CASES</h1>
+	
+	  <div class="container">
+		<div class="row caserow-container">
+		  <div class="col-lg-6 col-md-6 col-12 offset-1 offset-lg-0" id="casediv">
+			  <div class="case-dataparent">
+				<div class="casedata case1">
+					<h2 >Updating....</h2>
+					<span>Currently Infected Patients</span>
+				
+				</div>
+				<div class="casedata case2">
+				  <h2>Updating....</h2>
+				  <span>in Mild Condition</span>
+			  </div>
+			</div>
+			<div class="case-dataparent">
+				<div class="casedata case3">
+					<h2>Updating....</h2>
+					<span>Serious or Critical</span>
+				</div>
+			</div>
+			 
+			  </div>
+		 
+				<div class="col-lg-6 col-md-6 col-12 offset-1 offset-lg-0" id="casediv">
+					<div class="case-dataparent">
+					  <div class="casedata case4">
+						  <h2>Updating....</h2>
+						  <span>Cases which had an outcome</span>
+					  </div>
+					  <div class="casedata case5">
+						<h2>Updating....</h2>
+						<span>Recovered / Discharged</span>
+					</div>
+				  </div>
+				  <div class="case-dataparent">
+					  <div class="casedata case6">
+						  <h2>Updating....</h2>
+						  <span>Deaths</span>
+					  </div>
+				  </div>
+			  </div>
+		 </div>
+	 </div>
+</section>
+<br><br><br>
+<div class="table-responsive" id="table-container">
+	<table class="table table-striped table-bordered">
+	  <thead>
+		<tr>
+		  <th scope="col">Countries<br />List</th>
+		  <th scope="col">Total<br />Cases</th>
+		  <th scope="col">New<br />Cases</th>
+		  <th scope="col">Total<br />Deaths</th>
+		  <th scope="col">New<br />Deaths</th>
+		  <th scope="col">Total<br />Recovered</th>
+		  <th scope="col">Active<br/>Cases</th>
+		  <th scope="col">Serious,<br/>Critical</th>
+		  <th scope="col">Total<br/>Tests</th>
+		  <th scope="col">Deaths/<br/>1M pop</th>
+		</tr>
+	  </thead>
+	  <tbody id="load-table">
+		  
+	  </tbody>
+	</table>
+  </div>
+<br><br><br><br><br>
+			
+<script src="js/jquery.js" charset="utf-8"></script>
+<script src="js/popper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		 $.ajax({
+		url: "https://covid19api.io/api/v1/AllReports",
+		type: "GET",
+		dataType: "JSON",
+		success:function(data){
+		var total_cases=data.reports[0].table[0][0].TotalCases;
+		var total_deaths=data.reports[0].table[0][0].TotalDeaths;
+		var total_recovered=data.reports[0].table[0][0].TotalRecovered;
+		
+		var currently_infected_patients= data.reports[0].active_cases[0].currently_infected_patients;
+		var seriouus_or_critical= data.reports[0].active_cases[0].criticalStates;
+		var mild_condition= data.reports[0].active_cases[0].inMidCondition;
+
+		var case_had_outcome=data.reports[0].closed_cases[0].cases_which_had_an_outcome;
+		var Recovered_Discharged=data.reports[0].recovered;
+		var deaths=data.reports[0].deaths;
+	
+	     $(".header-extra-div .container .livestatus #totalcases").html(total_cases);
+		 $(".header-extra-div .container .livestatus #totaldeaths").html(total_deaths);
+		 $(".header-extra-div .container .livestatus #totalrecovered").html(total_recovered);
+
+		 $("#casecontainer .case1 h2").html(currently_infected_patients);
+		 $("#casecontainer .case2 h2").html(mild_condition);
+		 $("#casecontainer .case3 h2").html(seriouus_or_critical);
+		 $("#casecontainer .case4 h2").html(case_had_outcome);
+		 $("#casecontainer .case5 h2").html(Recovered_Discharged);
+		 $("#casecontainer .case6 h2").html(deaths);
+
+
+
+		$.each(data.reports[0].table[0],function(key,value){
+		$("#table-container #load-table").append("<tr>"+
+        "<th scope='row'>"+value.Country+"</th>"+
+        "<td>"+value.TotalCases+"</td>"+
+        "<td>"+value.NewCases+"</td>"+
+		"<td>"+value.TotalDeaths+"</td>"+
+		"<td>"+value.NewDeaths+"</td>"+
+        "<td>"+value.TotalRecovered+"</td>"+
+		"<td>"+value.ActiveCases+"</td>"+
+		"<td>"+value.Serious_Critical+"</td>"+
+		"<td>"+value.TotalTests+"</td>"+
+		"<td>"+value.Deaths_1M_pop+"</td>"+
+		"</tr>"
+		 );
+	
+	   });
+     }
+});
+
+	$('[data-toggle="popover"]').popover()      //ENABLE POPOVER
+	$('[data-toggle="tooltip"]').tooltip();    //ENABLE TOOLTIP
+	$('.toast').toast('show');               //ENABLE TOAST
+
+});
+</script>
+</body>
+</html>

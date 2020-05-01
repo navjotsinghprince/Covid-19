@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+$(document).ready(function(){
+	$.ajax({
+		url: "https://covid19api.io/api/v1/AllReports",
+		type: "GET",
+		dataType: "JSON",
+		success:function(data){
+		  console.table(data);
+		  console.log(data.reports);
+		  console.log(data.reports[0]);
+
+		  //console.log(data.reports[0].active_cases);
+		  //console.log(data.reports[0].active_cases[0]);
+		  //console.log(data.reports[0].active_cases[0].criticalStates);
+		  //console.log(data.reports[0].active_cases[0].currently_infected_patients);
+		  //console.log(data.reports[0].active_cases[0].inMidCondition);
+
+		//console.log(data.reports[0].closed_cases);
+		//console.log(data.reports[0].closed_cases[0]);
+		//console.log(data.reports[0].closed_cases[0].cases_which_had_an_outcome);
+		
+		//console.log(data.reports[0].deaths);
+		//console.log(data.reports[0].recovered);
+
+
+		//console.log(data.reports[0].table);
+		//console.log(data.reports[0].table[0]);  //today current results
+		//console.log(data.reports[0].table[1]);  //yesterday results
+
+		//console.log(data.reports[0].table[0][0]);
+
+		// console.log(data.reports[0].table[0][0].ActiveCases);
+		// console.log(data.reports[0].table[0][0].Continent);
+		// console.log(data.reports[0].table[0][0].Country);
+		// console.log(data.reports[0].table[0][0].Deaths_1M_pop);
+		// console.log(data.reports[0].table[0][0].NewCases);
+		// console.log(data.reports[0].table[0][0].NewDeaths);
+		// console.log(data.reports[0].table[0][0].Serious_Critical);
+		// console.log(data.reports[0].table[0][0].Tests_1M_);
+		// console.log(data.reports[0].table[0][0].TotCases_1M_Pop);
+		// console.log(data.reports[0].table[0][0].TotalCases);
+		// console.log(data.reports[0].table[0][0].TotalDeaths);
+		// console.log(data.reports[0].table[0][0].TotalRecovered);
+		// console.log(data.reports[0].table[0][0].TotalTests);
+	
+
+		//var path="data.reports[0].table[0][0]";
+
+		$.each(data.reports[0].table[0],function(key,value){
+		document.write("Active Cases are: " + value.ActiveCases +"<br>");
+		});
+	}
+ });
+});
+</script>
+</body>
+</html>
