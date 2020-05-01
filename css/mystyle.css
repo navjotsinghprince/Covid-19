@@ -137,29 +137,29 @@ margin-top: 10px !important;
 .casedata span{
 	font-family: 'Roboto Slab', serif;
 	font-size: 20px;
-	color: #565d47;
+	
 }
- .case1 h2{
-color:#3498db;
-text-align: center;
+ .case1 h2,.span1{
+  color:#3498db;
+  text-align: center;
 }
-.case2 h2{
+.case2 h2,.span2{
 	text-align: center;
-	color: #f39c12;
+	color: #f39c12 ;
 	}
-	.case3 h2{
+	.case3 h2,.span3{
 		text-align: center;
 		color:#e74c3c;
 		}
-		.case4 h2{
+		.case4 h2,.span4{
 			text-align: center;
 			color: #9b59b6;
 			}
-			.case5 h2{
+			.case5 h2,.span5{
 				text-align: center;
 				color:#2ecc71;
 				}
-				.case6 h2{
+				.case6 h2,.span6{
 					text-align: center;
 					color: #e74c3c;
 					}
